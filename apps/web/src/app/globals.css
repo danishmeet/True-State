@@ -1,0 +1,168 @@
+@import "tailwindcss";
+
+/* ─── Design Tokens ──────────────────────────────────────────────── */
+:root {
+  --ts-bg-primary: #030712;
+  --ts-bg-secondary: #0a1120;
+  --ts-bg-card: rgba(15, 23, 42, 0.6);
+  --ts-bg-card-hover: rgba(15, 23, 42, 0.85);
+  --ts-border: rgba(51, 65, 85, 0.5);
+  --ts-border-glow: rgba(16, 185, 129, 0.3);
+  --ts-text-primary: #f1f5f9;
+  --ts-text-secondary: #94a3b8;
+  --ts-text-muted: #64748b;
+  --ts-accent: #10b981;
+  --ts-accent-secondary: #06b6d4;
+  --ts-danger: #ef4444;
+  --ts-warning: #f59e0b;
+  --ts-info: #6366f1;
+
+  --background: var(--ts-bg-primary);
+  --foreground: var(--ts-text-primary);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-geist-mono);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-geist-mono);
+
+  --color-ts-accent: #10b981;
+  --color-ts-accent-secondary: #06b6d4;
+  --color-ts-danger: #ef4444;
+  --color-ts-warning: #f59e0b;
+  --color-ts-info: #6366f1;
+  --color-ts-bg-card: rgba(15, 23, 42, 0.6);
+  --color-ts-border: rgba(51, 65, 85, 0.5);
+}
+
+/* ─── Base ────────────────────────────────────────────────────────── */
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--ts-bg-primary);
+  color: var(--ts-text-primary);
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.3);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.5);
+}
+
+/* ─── Glassmorphism Card ─────────────────────────────────────────── */
+.glass-card {
+  background: var(--ts-bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--ts-border);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  background: var(--ts-bg-card-hover);
+  border-color: var(--ts-border-glow);
+  box-shadow: 0 0 30px rgba(16, 185, 129, 0.05);
+}
+
+/* ─── Glow Effects ───────────────────────────────────────────────── */
+.glow-emerald {
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.2), 0 0 60px rgba(16, 185, 129, 0.05);
+}
+
+.glow-cyan {
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.2), 0 0 60px rgba(6, 182, 212, 0.05);
+}
+
+.glow-red {
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.2), 0 0 60px rgba(239, 68, 68, 0.05);
+}
+
+.glow-amber {
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.2), 0 0 60px rgba(245, 158, 11, 0.05);
+}
+
+/* ─── Status Pulse ───────────────────────────────────────────────── */
+@keyframes pulse-healthy {
+  0%, 100% { opacity: 1; box-shadow: 0 0 4px #10b981; }
+  50% { opacity: 0.6; box-shadow: 0 0 12px #10b981; }
+}
+
+@keyframes pulse-warning {
+  0%, 100% { opacity: 1; box-shadow: 0 0 4px #f59e0b; }
+  50% { opacity: 0.6; box-shadow: 0 0 12px #f59e0b; }
+}
+
+@keyframes pulse-critical {
+  0%, 100% { opacity: 1; box-shadow: 0 0 4px #ef4444; }
+  50% { opacity: 0.6; box-shadow: 0 0 12px #ef4444; }
+}
+
+.status-dot-healthy {
+  animation: pulse-healthy 2s ease-in-out infinite;
+}
+
+.status-dot-warning {
+  animation: pulse-warning 1.5s ease-in-out infinite;
+}
+
+.status-dot-critical {
+  animation: pulse-critical 1s ease-in-out infinite;
+}
+
+/* ─── Gradient Backgrounds ───────────────────────────────────────── */
+.gradient-mesh {
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(6, 182, 212, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(99, 102, 241, 0.04) 0%, transparent 50%),
+    var(--ts-bg-primary);
+}
+
+/* ─── Fade In Animation ──────────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+/* ─── Shimmer ────────────────────────────────────────────────────── */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(15, 23, 42, 0) 0%,
+    rgba(51, 65, 85, 0.3) 50%,
+    rgba(15, 23, 42, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
