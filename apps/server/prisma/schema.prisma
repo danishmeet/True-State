@@ -24,9 +24,54 @@ model Patient {
   // Relations
   events            ClinicalEvent[]
   modelPredictions  ModelPrediction[]
+  legalRecords      LegalRecord[]
 
   @@index([deletedAt])
 }
+
+enum VerificationStatus {
+  DRAFT
+  NEEDS_REVIEW
+  VERIFIED
+  REJECTED
+}
+
+enum RiskLevel {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+model LegalRecord {
+  id            String             @id @default(uuid())
+  title         String
+  description   String?
+  documentType  String             @default("General Legal")
+  jurisdiction  String             @default("US Federal")
+  riskLevel     RiskLevel          @default(MEDIUM)
+  patientId     String?
+  status        VerificationStatus @default(DRAFT)
+  reviewerNotes String?
+  clauses       Json?
+  detectedIssues Json?
+
+  // Timestamps & Soft delete
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+  deletedAt     DateTime?
+
+  // Relations
+  patient       Patient?           @relation(fields: [patientId], references: [id])
+
+  @@index([patientId])
+  @@index([status])
+  @@index([riskLevel])
+  @@index([documentType])
+  @@index([jurisdiction])
+  @@index([deletedAt])
+}
+
 
 model ClinicalEvent {
   id        String   @id @default(uuid())

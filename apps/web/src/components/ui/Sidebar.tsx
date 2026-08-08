@@ -12,6 +12,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Activity,
+  FileText,
 } from "lucide-react";
 
 interface NavItem {
@@ -39,6 +40,12 @@ const NAV_ITEMS: NavItem[] = [
     href: "/dashboard/causal-debugger",
     icon: <GitBranch size={20} />,
     description: "IV-OPIL & Proxy-SLCD",
+  },
+  {
+    label: "Legal Records",
+    href: "/dashboard/legal-records",
+    icon: <FileText size={20} />,
+    description: "Verification & Audit Notes",
   },
   {
     label: "Infrastructure",
